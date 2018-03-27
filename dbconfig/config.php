@@ -1,7 +1,7 @@
 <?php
 /*For My LocalPC*/
 // 1. Create a database connection
-$con=mysqli_connect("127.0.0.1", "root", "");
+$con=mysqli_connect("localhost", "root", "", "fyp2");
 if (!$con) {
     die("Database connection failed: " . mysqli_error());
 }
