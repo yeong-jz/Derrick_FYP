@@ -1,7 +1,7 @@
 <?php
 /*For My LocalPC*/
 // 1. Create a database connection
-$con=mysqli_connect("localhost", "root", "");
+$con=mysqli_connect("http://localhost/phpmyadmin/index.php", "root", "");
 if (!$con) {
     die("Database connection failed: " . mysqli_error());
 }
