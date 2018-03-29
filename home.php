@@ -77,7 +77,7 @@ body {
 			<div class="col-sm-offset-2 col-sm-4 col-xs-offset-2 col-xs-5">
 					<div class="row">
 					<div class="row">
-					<a href="index.php">
+					<a href="parttime.php">
 					<img border="0" style="margin-top:30px; border-radius: 20%;" alt="W3Schools" src="imgs/part1.PNG" width="150" height="150">
 					</a>
 					</div>
@@ -88,7 +88,7 @@ body {
 			<div class="col-sm-offset-1 col-sm-4 col-xs-5">
 			<div class="row">
 			<div class="row">
-					<a href="index.php">
+					<a href="music.php">
 					<img border="0" style="float:right; margin-top:30px; border-radius: 20%;" alt="W3Schools" src="imgs/music1.pnG" width="150" height="150">
 					</a>
 			</div>
@@ -97,7 +97,7 @@ body {
 			<div class="col-sm-offset-2 col-sm-4 col-xs-offset-2 col-xs-5">
 					<div class="row">
 					<div class="row">
-					<a href="index.php">
+					<a href="deliver.php">
 					<img border="0" style="margin-top:30px; border-radius: 20%;" alt="W3Schools" src="imgs/deliver1.PNG" width="150" height="150">
 					</a>
 					</div>

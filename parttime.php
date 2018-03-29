@@ -90,21 +90,21 @@ if(isset($_POST['submit_message'])){
 
 if (isset($_POST['submit'])){
   $id = md5($_SESSION['username'].$_POST['title']);
-  $query = "INSERT INTO tuition (id,username,price,description, title) VALUES ('".$id."','".$_SESSION['username']."','".$_POST['price']."','".$_POST['description']."','".$_POST['title']."')";
+  $query = "INSERT INTO parttime (id,username,price,description, title) VALUES ('".$id."','".$_SESSION['username']."','".$_POST['price']."','".$_POST['description']."','".$_POST['title']."')";
   mysqli_query($con,$query);
   $image = $_FILES['image']['tmp_name'];
   $target = "C:/wamp64/www/FYP2/tuitionimg/".basename($_FILES['image']['tmp_name']);
   move_uploaded_file($image,$target);
-  $picture_insert = "UPDATE tuition SET picture='".basename($_FILES['image']['tmp_name'])."' WHERE id='".$id."'";
+  $picture_insert = "UPDATE parttime SET picture='".basename($_FILES['image']['tmp_name'])."' WHERE id='".$id."'";
   mysqli_query($con, $picture_insert);
 }
 
 if(isset($_POST['confirmdeal'])){
-	$insertquery="INSERT INTO tuition_deal (id,buyer,status) VALUES ('".$_POST['dealid']."','".$_SESSION['username']."','Unconfirmed')";
+	$insertquery="INSERT INTO parttime_deal (id,buyer,status) VALUES ('".$_POST['dealid']."','".$_SESSION['username']."','Unconfirmed')";
 	mysqli_query($con,$insertquery);
 }
 
-$retrieve="SELECT accounts_info.Username, accounts_info.FullName, accounts_info.Image, tuition.id, tuition.title, tuition.price, tuition.picture FROM accounts_info INNER JOIN tuition ON accounts_info.Username=tuition.username";
+$retrieve="SELECT accounts_info.Username, accounts_info.FullName, accounts_info.Image, parttime.id, parttime.title, parttime.price, parttime.picture FROM accounts_info INNER JOIN parttime ON accounts_info.Username=parttime.username";
 $result=mysqli_query($con,$retrieve);
 while($row=mysqli_fetch_array($result)){
 	$id=$row['id'];
@@ -161,7 +161,7 @@ while($row=mysqli_fetch_array($result)){
             <h4 class="modal-title">Provide particulars</h4>
           </div>
           <div class="modal-body">
-          <form method="post" action="tuition.php" enctype="multipart/form-data">
+          <form method="post" action="parttime.php" enctype="multipart/form-data">
             <div class="spacing">
             <label>Title: </label> <input type='text' name='title'>
             </div>
@@ -216,7 +216,7 @@ while($row=mysqli_fetch_array($result)){
 	    <h4 class="modal-title">Private Message</h4>
 	   </div>
 	   <div class="modal-body bg-warning">
-	    <form method="POST" action="tuition.php">
+	    <form method="POST" action="parttime.php">
 	     <input type="hidden" name="tusername" id="tusername" readonly>
 	     <div class="col-xs-12">
 	      <label><h3>To:&nbsp </h3></label><input type="text" id="tutorname" name="tutorname" class="inputbox" readonly>
@@ -250,7 +250,7 @@ while($row=mysqli_fetch_array($result)){
         <h4 class="modal-title">Confirmation</h4>
       </div>
       <div class="modal-body shorten">
-				<form action="tuition.php" method="POST">
+				<form action="parttime.php" method="POST">
 					<input type='hidden' id='dealid' name="dealid"/>
 	        <p>Are you sure you want to proceed with this dealing?</p>
 					<input type="submit" name="confirmdeal" value="Confirm" style="height:5%; width:20%; border-radius:10%; background-color:#800000; border:none; color:#ffffff;"/>
@@ -277,9 +277,9 @@ while($row=mysqli_fetch_array($result)){
 	 <div class="modal-footer">
 		 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	 </div>
+	</div>
 </div>
 </div>
-</div
 
 </body>
 <script src='star.js'></script>
@@ -320,7 +320,7 @@ function description(id){
    document.getElementById("description").innerHTML=this.responseText;
   }
  }
- xmlhttp.open("GET","getDescription.php?id="+id,true);
+ xmlhttp.open("GET","getDescription_parttime.php?id="+id,true);
  xmlhttp.send();
 }
 

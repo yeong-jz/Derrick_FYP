@@ -5,9 +5,9 @@ $query='SELECT bio FROM accounts_info WHERE username="'.$_GET['username'].'"';
 $result=mysqli_query($con,$query);
 $row=mysqli_fetch_array($result);
 echo"
-<div style='margin-top:10px;'>
+<div style='margin-top:10px; width:100%;'>
 <label>Bio: </label>
-<input type=textarea value='".$row['bio']."' style='border-radius: 25px; border: 2px solid 	#808080'; readonly>
+<textarea style='border-radius: 5px; width:100%; height:300px; margin:10px; border: 2px solid 	#808080;' readonly>".$row['bio']."</textarea>
 </div>
 ";
 ?>

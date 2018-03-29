@@ -164,22 +164,20 @@
                 </div>
               </div>
               <div class="profile-user-buttons">
-                <button  onclick="review('<?php echo $_SESSION['username']; ?>')" data-toggle='modal' data-target='#myModal4' class="btn btn-success btn-md">Rate</button>
-                <button class="btn btn-danger btn-md">Message</button>
-                <button class="btn btn-warning btn-md" data-toggle="modal" data-target="#myModal">Edit</button>
+                <button class="btn btn-warning btn-md" style="width:30%; height:40px; margin-bottom:10px;" data-toggle="modal" data-target="#myModal">Edit</button>
               </div>
             <div class="profile-use-menu">
               <ul class="nav">
                 <button type='button' style='margin-top:7px;' class='highlight' onclick="overview('<?php echo $_SESSION['username']; ?>')" ><span class="glyphicon glyphicon-home"></span>Overview</button>
                 <button type='button' class='highlight' onclick="accountstatus('<?php echo $_SESSION['username']; ?>')" ><span class="glyphicon glyphicon-user"></span>Account status</button>
                 <button type='button' class='highlight' onclick="listings('<?php echo $_SESSION['username']; ?>')" ><span class="glyphicon glyphicon-ok"></span>Listings</button>
-                <button type='button' class='highlight' onclick="overview('<?php echo $_SESSION['username']; ?>')" ><span class="glyphicon glyphicon-star"></span>Ratings</button>
+                <button type='button' class='highlight' onclick="review('<?php echo $_SESSION['username']; ?>')" ><span class="glyphicon glyphicon-star"></span>Ratings</button>
                 <button type='button' class='highlight' onclick="dealing('<?php echo $_SESSION['username']; ?>')" ><span class="glyphicon glyphicon-usd"></span>Dealings</button>
               </ul>
             </div>
           </div>
         </div>
-      <div class="col-sm-9">
+      <div class="col-sm-9 col-xs-12">
         <p id='display'></p>
       </div>
   </div>
@@ -226,7 +224,7 @@
           <input type='date' name='dob' placeholder='Date of Birth' value='<?php echo $row['dob']; ?>'/>
         </div>
         <div class='col-xs-12'style='margin-bottom:5px;'>
-          <label>Bio: </label><br>
+          <label>Bio: </label></br>
           <textarea style='width:98%; height: 200px;' name='bio'><?php echo $row['bio']; ?></textarea>
         </div>
       </div>
@@ -284,7 +282,8 @@
      <h4 class="modal-title">Star Rating System.</h4>
       </div>
       <div class="modal-body">
-     <p id='reviewsystem'></p>
+      <div class="col-xs-12">
+            <p id='reviewsystem'></p>
       </div>
       <div class="modal-footer">
      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -293,6 +292,9 @@
 
      </div>
    </div>
+ </div>
+</div>
+
 <script src='star.js'></script>
 <script>
 function overview(x) {
@@ -317,14 +319,14 @@ function review(x){
  }
  xmlhttp.onreadystatechange=function() {
   if (this.readyState==4 && this.status==200) {
-   document.getElementById("reviewsystem").innerHTML=this.responseText;
+   document.getElementById("display").innerHTML=this.responseText;
   }
  }
  xmlhttp.open("GET","review.php?username="+x,true);
  xmlhttp.send();
 }
 
-function rating(x){
+function rating(x,y){
  if (window.XMLHttpRequest) {
   // code for IE7+, Firefox, Chrome, Opera, Safari
   xmlhttp=new XMLHttpRequest();
@@ -332,11 +334,50 @@ function rating(x){
  else { // code for IE6, IE5
   xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
  }
- xmlhttp.open("GET","rating_P.php?username="+x,true);
+ xmlhttp.open("GET","rating_P.php?username="+x+"&id="+y,true);
  xmlhttp.send();
 }
 
+function rating_music(x,y){
+ if (window.XMLHttpRequest) {
+  // code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+ }
+ else { // code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+ }
+ xmlhttp.open("GET","rating_P_music.php?username="+x+"&id="+y,true);
+ xmlhttp.send();
+}
+
+function rating_parttime(x,y){
+ if (window.XMLHttpRequest) {
+  // code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+ }
+ else { // code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+ }
+ xmlhttp.open("GET","rating_P.php?username="+x+"&id="+y,true);
+ xmlhttp.send();
+}
+
+function rating_deliver(x,y){
+ if (window.XMLHttpRequest) {
+  // code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+ }
+ else { // code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+ }
+ xmlhttp.open("GET","rating_P.php?username="+x+"&id="+y,true);
+ xmlhttp.send();
+}
+
+
+
 function rating2(){
+ var username = document.getElementById('username').value;
  var x = document.getElementById('count').innerHTML;
  var y = document.getElementById('review').value;
  if (window.XMLHttpRequest) {
@@ -349,6 +390,62 @@ function rating2(){
  xmlhttp.open("GET","rating2_P.php?stars="+x+"&review="+y,true);
  xmlhttp.send();
  $('#myModal3').modal('toggle');
+ dealing(username);
+
+}
+
+function rating2_music(){
+ var username = document.getElementById('username').value;
+ var x = document.getElementById('count').innerHTML;
+ var y = document.getElementById('review').value;
+ if (window.XMLHttpRequest) {
+  // code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+ }
+ else { // code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+ }
+ xmlhttp.open("GET","rating2_P_music.php?stars="+x+"&review="+y,true);
+ xmlhttp.send();
+ $('#myModal3').modal('toggle');
+ dealing(username);
+
+}
+
+function rating2_parttime(){
+ var username = document.getElementById('username').value;
+ var x = document.getElementById('count').innerHTML;
+ var y = document.getElementById('review').value;
+ if (window.XMLHttpRequest) {
+  // code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+ }
+ else { // code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+ }
+ xmlhttp.open("GET","rating2_P_parttime.php?stars="+x+"&review="+y,true);
+ xmlhttp.send();
+ $('#myModal3').modal('toggle');
+ dealing(username);
+
+}
+
+function rating2_deliver(){
+ var username = document.getElementById('username').value;
+ var x = document.getElementById('count').innerHTML;
+ var y = document.getElementById('review').value;
+ if (window.XMLHttpRequest) {
+  // code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+ }
+ else { // code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+ }
+ xmlhttp.open("GET","rating2_P_deliver.php?stars="+x+"&review="+y,true);
+ xmlhttp.send();
+ $('#myModal3').modal('toggle');
+ dealing(username);
+
 }
 
 function dealing(x) {
@@ -361,20 +458,79 @@ function dealing(x) {
   };
   xhttp.open("GET", "getdealings.php?username="+x, true);
   xhttp.send();
+
 }
 
 function acceptdeal(x) {
+  var username = document.getElementById('username').value;
   var xhttp;
   xhttp = new XMLHttpRequest();
   xhttp.open("GET", "dealaccept.php?id="+x, true);
   xhttp.send();
+  dealing(username);
+}
+
+function acceptdeal_music(x) {
+  var username = document.getElementById('username').value;
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "dealaccept_music.php?id="+x, true);
+  xhttp.send();
+  dealing(username);
+}
+
+function acceptdeal_parttime(x) {
+  var username = document.getElementById('username').value;
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "dealaccept_parttime.php?id="+x, true);
+  xhttp.send();
+  dealing(username);
+}
+
+function acceptdeal_deliver(x) {
+  var username = document.getElementById('username').value;
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "dealaccept_deliver.php?id="+x, true);
+  xhttp.send();
+  dealing(username);
 }
 
 function reject(x) {
+  var username = document.getElementById('username').value;
   var xhttp;
   xhttp = new XMLHttpRequest();
   xhttp.open("GET", "dealreject.php?id="+x, true);
   xhttp.send();
+  dealing(username);
+}
+
+function reject_music(x) {
+  var username = document.getElementById('username').value;
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "dealreject_music.php?id="+x, true);
+  xhttp.send();
+  dealing(username);
+}
+
+function reject_parttime(x) {
+  var username = document.getElementById('username').value;
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "dealreject_parttime.php?id="+x, true);
+  xhttp.send();
+  dealing(username);
+}
+
+function reject_deliver(x) {
+  var username = document.getElementById('username').value;
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "dealreject_deliver.php?id="+x, true);
+  xhttp.send();
+  dealing(username);
 }
 
 function accountstatus(x) {
@@ -415,6 +571,48 @@ function deletelisting(x) {
   listings(username);
 }
 
+function deletelisting_music(x) {
+  var username = document.getElementById('username').value;
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("display").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "deletelisting_music.php?id="+x, true);
+  xhttp.send();
+  listings(username);
+}
+
+function deletelisting_parttime(x) {
+  var username = document.getElementById('username').value;
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("display").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "deletelisting_parttime.php?id="+x, true);
+  xhttp.send();
+  listings(username);
+}
+
+function deletelisting_deliver(x) {
+  var username = document.getElementById('username').value;
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("display").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "deletelisting_deliver.php?id="+x, true);
+  xhttp.send();
+  listings(username);
+}
+
 function editlisting(x) {
   var username = document.getElementById('username').value;
   var xhttp;
@@ -425,6 +623,45 @@ function editlisting(x) {
     }
   };
   xhttp.open("GET", "editlisting.php?id="+x, true);
+  xhttp.send();
+}
+
+function editlisting_music(x) {
+  var username = document.getElementById('username').value;
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("editlisting").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "editlisting_music.php?id="+x, true);
+  xhttp.send();
+}
+
+function editlisting_parttime(x) {
+  var username = document.getElementById('username').value;
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("editlisting").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "editlisting_parttime.php?id="+x, true);
+  xhttp.send();
+}
+
+function editlisting_deliver(x) {
+  var username = document.getElementById('username').value;
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("editlisting").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "editlisting_deliver.php?id="+x, true);
   xhttp.send();
 }
 
@@ -440,5 +677,40 @@ function updatelisting(x) {
   $("#listing").modal('hide')
 }
 
+function updatelisting_music(x) {
+  var username = document.getElementById('username').value;
+  var title = document.getElementById('title').value;
+  var price = document.getElementById('price').value;
+  var description = document.getElementById('description').value;
+  xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "updatelisting_music.php?id="+x+"&title="+title+"&price="+price+"&description="+description, true);
+  xhttp.send();
+  listings(username);
+  $("#listing").modal('hide')
+}
+
+function updatelisting_parttime(x) {
+  var username = document.getElementById('username').value;
+  var title = document.getElementById('title').value;
+  var price = document.getElementById('price').value;
+  var description = document.getElementById('description').value;
+  xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "updatelisting_parttime.php?id="+x+"&title="+title+"&price="+price+"&description="+description, true);
+  xhttp.send();
+  listings(username);
+  $("#listing").modal('hide')
+}
+
+function updatelisting_deliver(x) {
+  var username = document.getElementById('username').value;
+  var title = document.getElementById('title').value;
+  var price = document.getElementById('price').value;
+  var description = document.getElementById('description').value;
+  xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "updatelisting_deliver.php?id="+x+"&title="+title+"&price="+price+"&description="+description, true);
+  xhttp.send();
+  listings(username);
+  $("#listing").modal('hide')
+}
 </script>
 </body>
